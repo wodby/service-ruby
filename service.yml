@@ -1,0 +1,126 @@
+name: ruby
+type: service
+icon: ruby
+title: Ruby
+scalable: true
+labels:
+- ruby
+options:
+- version: '4.0'
+  default: true
+  eol: '2029-03-31T00:00:00+00:00'
+  tag: 4.0-0.29.2
+- version: '3.4'
+  eol: '2028-03-31T00:00:00+00:00'
+  tag: 3.4-0.29.2
+- version: '3.3'
+  eol: '2027-03-31T00:00:00+00:00'
+  tag: 3.3-0.29.2
+
+endpoints:
+- name: ruby
+  ports:
+  - name: ruby
+    number: 8080
+    main: true
+    protocol: http
+
+links:
+- name: db
+  title: DBMS
+  required: false
+  env:
+  - name: DB_HOST
+    value: '{{link.database.host}}'
+  - name: DB_PORT
+    value: '{{link.database.port}}'
+  - name: DB_USERNAME
+    value: '{{link.database.user.name}}'
+  - name: DB_NAME
+    value: '{{link.database.db.name}}'
+  - name: DB_DATABASE
+    value: '{{link.database.db.name}}'
+  - name: DB_PASSWORD
+    value: '{{link.database.user.password}}'
+    secret: true
+  - name: DB_DRIVER
+    value: '{{link.database.driver}}'
+  - name: DB_CONNECTION
+    value: '{{link.database.driver}}'
+  selectors:
+  - type: db
+    labels:
+    - mariadb
+  - type: db
+    labels:
+    - mysql
+  - type: db
+    labels:
+    - postgres
+- name: sendmail
+  title: Mail Transfer Agent
+  required: false
+  env:
+  - name: SMTP_HOST
+    value: '{{link.host}}'
+  - name: SMTP_PORT
+    value: '{{link.port}}'
+  selectors:
+  - type: service
+    labels:
+    - smtpd
+- name: redis
+  title: Redis
+  required: false
+  env:
+  - name: REDIS_PORT
+    value: '{{link.port}}'
+  - name: REDIS_HOST
+    value: '{{link.host}}'
+  - name: REDIS_PASSWORD
+    value: '{{link.tokens.password}}'
+    secret: true
+  selectors:
+  - type: datastore
+    labels:
+    - redis
+  - type: datastore
+    labels:
+    - valkey
+
+integrations:
+- name: variable
+  title: Variable
+  type: variable
+  required: false
+  multiple: true
+
+build:
+  dockerfile: Dockerfile
+  connect: true
+
+helm:
+  name: wodby
+  source: oci://registry-1.docker.io/wodby/ruby
+  chart: oci://registry-1.docker.io/wodby/ruby
+  version: 0.1.0
+
+workloads:
+- name: main
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: '{{helm.release}}'
+  kind: deployment
+  primary: true
+  helm:
+    labels: podLabels
+    annotations: podAnnotations
+    volumes: extraVolumes
+  containers:
+  - name: ruby
+    image: wodby/ruby
+    build: true
+    helm:
+      resources: resources
+      env: envVars
+      mounts: extraVolumeMounts
