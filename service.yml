@@ -9,13 +9,13 @@ options:
 - version: '4.0'
   default: true
   eol: '2029-03-31T00:00:00+00:00'
-  tag: 4.0-0.29.2
+  tag: 4.0-0.29.3
 - version: '3.4'
   eol: '2028-03-31T00:00:00+00:00'
-  tag: 3.4-0.29.2
+  tag: 3.4-0.29.3
 - version: '3.3'
   eol: '2027-03-31T00:00:00+00:00'
-  tag: 3.3-0.29.2
+  tag: 3.3-0.29.3
 
 endpoints:
 - name: ruby
