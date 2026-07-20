@@ -98,6 +98,11 @@ integrations:
 build:
   dockerfile: Dockerfile
   connect: true
+  templates:
+  - name: ruby
+    title: Ruby boilerplate
+    repo: https://github.com/wodby/ruby-boilerplate
+    branch: main
 
 helm:
   name: wodby
