@@ -9,10 +9,10 @@ configuration for Ruby.
 - [Wodby service documentation](https://wodby.com/docs/2.0/services/)
 - [Service manifest reference](https://wodby.com/docs/2.0/services/template/)
 
-## Start with a template
+## Start with a boilerplate
 
-Use one of the source templates exposed by this service to start with
-compatible build configuration and Wodby CI:
+Use one of the boilerplates exposed by this service to start with compatible
+build configuration and Wodby CI:
 
 - [Ruby boilerplate](https://github.com/wodby/ruby-boilerplate)
 
@@ -31,7 +31,7 @@ compatible build configuration and Wodby CI:
 | Containers | `ruby` using `wodby/ruby`, build target |
 | Endpoints | `ruby`: HTTP 8080 (main) |
 | Service links | DBMS (`db`), optional, Mail Transfer Agent (`sendmail`), optional, Redis, optional |
-| Application build | Git source connection enabled; Dockerfile: `Dockerfile`; starters: Ruby boilerplate |
+| Application build | Git source connection enabled; Dockerfile: `Dockerfile`; boilerplates: Ruby boilerplate |
 | Helm | chart `oci://registry-1.docker.io/wodby/ruby`; version `0.1.0` |
 | Configuration | 1 integration slots |
 
