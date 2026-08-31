@@ -32,7 +32,7 @@ build configuration and Wodby CI:
 | Endpoints | `ruby`: HTTP 8080 (main) |
 | Service links | DBMS (`db`), optional, Mail Transfer Agent (`sendmail`), optional, Redis, optional |
 | Application build | Git source connection enabled; Dockerfile: `Dockerfile`; boilerplates: Ruby boilerplate |
-| Helm | chart `oci://registry-1.docker.io/wodby/ruby`; version `0.1.2` |
+| Helm | chart `oci://registry-1.docker.io/wodby/ruby`; version `0.2.1` |
 | Configuration | 1 integration slots |
 
 ## Use this service
