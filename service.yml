@@ -10,12 +10,15 @@ options:
   default: true
   eol: '2029-03-31T00:00:00+00:00'
   tag: 4.0-r0
+  devTag: 4.0-dev-r0
 - version: '3.4'
   eol: '2028-03-31T00:00:00+00:00'
   tag: 3.4-r0
+  devTag: 3.4-dev-r0
 - version: '3.3'
   eol: '2027-03-31T00:00:00+00:00'
   tag: 3.3-r0
+  devTag: 3.3-dev-r0
 endpoints:
 - name: ruby
   ports:
@@ -139,3 +142,26 @@ workloads:
       resources: resources
       env: envVars
       mounts: extraVolumeMounts
+
+workspace:
+  configuration: [/docker-entrypoint.sh, --configure-runtime]
+  runner:
+    workload: main
+    container: ruby
+    workingDirectory: /usr/src/app
+    homeDirectory: /home/wodby
+    username: wodby
+    uid: 1000
+    gid: 1000
+    port: 2222
+    command: [sudo, /usr/sbin/sshd, -D, -e, -f, /dev/null]
+  mounts:
+  - name: code
+    workload: main
+    container: ruby
+    path: /usr/src/app
+  preparation:
+  - name: dependencies
+    command: [workspace-ruby, prepare]
+    timeoutSeconds: 1800
+  reload: restart
