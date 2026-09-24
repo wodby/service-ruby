@@ -62,3 +62,16 @@ wodby service validate-manifest service.yml --org <org-id>
 ```
 
 See the [service manifest reference](https://wodby.com/docs/2.0/services/template/) and the [managed services index](https://github.com/wodby/services).
+
+## Development workspaces
+
+`workspace-ruby prepare` requires `Gemfile.lock` and runs a frozen Bundler install,
+including development dependencies. `workspace-ruby start` runs Puma or the explicit
+`WORKSPACE_RUBY_COMMAND`. It sets `RAILS_ENV` and `RACK_ENV` to `development`; `HOST`
+and `PORT` default to `0.0.0.0` and `8080`. Generic Ruby requires an application
+restart after code changes. Rails applications should configure
+`config.file_watcher = ActiveSupport::FileUpdateChecker` in development when using
+shared/network storage. A custom evented watcher is not made reliable by placing
+pods on the same node. No database migrations or seed commands run automatically.
+
+Requires a runtime image declaring workspace contract version 1. Ordinary and development option tags must use matching revisions.
