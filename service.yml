@@ -153,6 +153,10 @@ workloads:
   containers:
   - name: ruby
     image: wodby/ruby
+    resources:
+      request:
+        cpu: 20
+        memory: 128
     build: true
     helm:
       resources: resources
