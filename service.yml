@@ -11,15 +11,21 @@ options:
   default: true
   eol: '2029-03-31T00:00:00+00:00'
   tag: 4.0-r9
+  digest: sha256:1a22dcf06f32a7c9a069afa466e51a972769546cf86d4c4bdc6ccc3a08b48d3a
   devTag: 4.0-dev-r9
+  devDigest: sha256:349bef9d0bfbaec3847dc932e1798bad9f15c64036e0f6edac7765388f5ed6f7
 - version: '3.4'
   eol: '2028-03-31T00:00:00+00:00'
   tag: 3.4-r9
+  digest: sha256:2c28e00f96915a197606968f96e68bd6ac85bffc0d486af31dec0b76342ffa72
   devTag: 3.4-dev-r9
+  devDigest: sha256:447ef69ed019e4aca2a6033d43470a0d10d047de2ca873b2d499694dd8fe7882
 - version: '3.3'
   eol: '2027-03-31T00:00:00+00:00'
   tag: 3.3-r9
+  digest: sha256:7ff961e28d66c3d1a7f09baae92150776fbb656c0e2adb02ed44b95b2cf603bc
   devTag: 3.3-dev-r9
+  devDigest: sha256:48418f4a6972ada8db4f7a5572df68d289ce7efee5f9dcb4ee11d66ff5eb92a1
 endpoints:
 - name: ruby
   ports:
